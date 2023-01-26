@@ -1,10 +1,7 @@
 # Puppeteer Cluster
 
-[![Build Status](https://github.com/thomasdondorf/puppeteer-cluster/actions/workflows/actions.yml/badge.svg)](https://github.com/thomasdondorf/puppeteer-cluster/actions/workflows/actions.yml)
-[![npm](https://img.shields.io/npm/v/puppeteer-cluster)](https://www.npmjs.com/package/puppeteer-cluster)
-[![npm download count](https://img.shields.io/npm/dm/puppeteer-cluster)](https://www.npmjs.com/package/puppeteer-cluster)
-[![Coverage Status](https://coveralls.io/repos/github/thomasdondorf/puppeteer-cluster/badge.svg?branch=master)](https://coveralls.io/github/thomasdondorf/puppeteer-cluster?branch=master)
-[![Known Vulnerabilities](https://snyk.io/test/github/thomasdondorf/puppeteer-cluster/badge.svg)](https://snyk.io/test/github/thomasdondorf/puppeteer-cluster)
+[![npm](https://img.shields.io/npm/v/@pricerobot/puppeteer-cluster)](https://www.npmjs.com/package/@pricerobot/puppeteer-cluster)
+[![npm download count](https://img.shields.io/npm/dm/@pricerobot/puppeteer-cluster)](https://www.npmjs.com/package/@pricerobot/puppeteer-cluster)
 [![MIT License](https://img.shields.io/npm/l/puppeteer-cluster.svg)](#license)
 
 Create a cluster of puppeteer workers. This library spawns a pool of Chromium instances via [Puppeteer] and helps to keep track of jobs and errors. This is helpful if you want to crawl multiple pages or run tests in parallel. Puppeteer Cluster takes care of reusing Chromium and restarting the browser in case of errors.
@@ -56,6 +53,10 @@ const { Cluster } = require('puppeteer-cluster');
   const cluster = await Cluster.launch({
     concurrency: Cluster.CONCURRENCY_CONTEXT,
     maxConcurrency: 2,
+    puppeteerOptions: {
+            proxyServer: proxy, // Used by this version of @pricerobot/puppeteer-cluster
+            args: [`--proxy-server=${proxy}`] // Note! only works for CONCURRENCY_PAGE 
+    }
   });
 
   await cluster.task(async ({ page, data: url }) => {

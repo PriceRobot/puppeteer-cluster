@@ -7,8 +7,9 @@ import SingleBrowserImplementation from '../SingleBrowserImplementation';
 export default class Context extends SingleBrowserImplementation {
 
     protected async createResources(): Promise<ResourceData> {
+        var options = this.options.proxyServer ? {proxyServer: this.options.proxyServer} : undefined;
         const context = await (this.browser as puppeteer.Browser)
-            .createIncognitoBrowserContext();
+            .createIncognitoBrowserContext(options);
         const page = await context.newPage();
         return {
             context,
