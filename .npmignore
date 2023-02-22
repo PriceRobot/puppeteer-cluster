@@ -11,3 +11,4 @@ examples/
 
 .travis.yml
 .editorconfig
+tsconfig.json
