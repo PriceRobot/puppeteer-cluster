@@ -15,11 +15,15 @@ import ConcurrencyImplementation, { WorkerInstance, ConcurrencyImplementationCla
 
 const debug = util.debugGenerator('Cluster');
 
+interface ExtendedPuppeteerNodeLaunchOptions extends PuppeteerNodeLaunchOptions {
+    proxyServer?: string;
+}
+
 interface ClusterOptions {
     concurrency: number | ConcurrencyImplementationClassType;
     maxConcurrency: number;
     workerCreationDelay: number;
-    puppeteerOptions: PuppeteerNodeLaunchOptions;
+    puppeteerOptions: ExtendedPuppeteerNodeLaunchOptions;
     perBrowserOptions: PuppeteerNodeLaunchOptions[] | undefined;
     monitor: boolean;
     timeout: number;
